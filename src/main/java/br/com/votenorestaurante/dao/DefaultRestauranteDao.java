@@ -10,16 +10,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-public class DefaultRestauranteDao implements RestauranteDao {
-
-    private EntityManager em;
+public class DefaultRestauranteDao extends BaseDao implements RestauranteDao {
 
     public DefaultRestauranteDao() {
         this(null);
     }
 
     public DefaultRestauranteDao(EntityManager em) {
-        this.em = em;
+        super(em);
     }
 
     @Override

@@ -3,7 +3,6 @@ package br.com.votenorestaurante.model;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Voto extends Entidade {
@@ -39,5 +38,26 @@ public class Voto extends Entidade {
 
     public void setVencedor(Restaurante vencedor) {
         this.vencedor = vencedor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Voto voto = (Voto) o;
+
+        if (!votante.equals(voto.votante)) return false;
+        return duelo.equals(voto.duelo);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + votante.hashCode();
+        result = 31 * result + duelo.hashCode();
+        return result;
     }
 }
