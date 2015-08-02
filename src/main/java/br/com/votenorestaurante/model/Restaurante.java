@@ -23,4 +23,11 @@ public class Restaurante extends Entidade {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
+
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
 }

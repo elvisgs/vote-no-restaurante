@@ -57,4 +57,9 @@ public class Duelo {
         result = 31 * result + restaurante2.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s X %s", restaurante1.getNome(), restaurante2.getNome());
+    }
 }
