@@ -39,7 +39,9 @@ public class DefaultVotanteDaoTest {
 
         dao.salvar(votante);
 
-        List<Votante> votantes = em.createQuery("select v from Votante v", Votante.class).getResultList();
+        List<Votante> votantes = em.createQuery("select v from Votante v where v = :votante", Votante.class)
+                .setParameter("votante", votante)
+                .getResultList();
         assertThat(votantes).hasSize(1);
     }
 

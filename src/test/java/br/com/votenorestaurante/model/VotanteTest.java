@@ -27,6 +27,7 @@ public class VotanteTest {
     public void associaVotanteComOVotoAdicionado() {
         Votante votante = new Votante();
         Voto voto = new Voto();
+        voto.setDuelo(new Duelo(new Restaurante(), new Restaurante()));
 
         votante.addVoto(voto);
 

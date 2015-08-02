@@ -22,12 +22,20 @@ public class TestConfig {
         return Persistence.createEntityManagerFactory("default");
     }
 
-    @Bean @Scope("prototype")
+    @Bean
     public EntityManager entityManager() {
+        Map<String, Object> props = entityManagerFactory().getProperties();
+        JDBCDataSource dataSource = new JDBCDataSource();
+        dataSource.setUrl((String) props.get("javax.persistence.jdbc.url"));
+        dataSource.setUser("sa");
+        dataSource.setPassword("");
+
+        DatabasePopulatorUtils.execute(databasePopulator(), dataSource);
+
         return entityManagerFactory().createEntityManager();
     }
 
-    @Bean @DependsOn("entityManagerFactory")
+    //@Bean
     public DataSource dataSource() {
         Map<String, Object> props = entityManagerFactory().getProperties();
         JDBCDataSource dataSource = new JDBCDataSource();

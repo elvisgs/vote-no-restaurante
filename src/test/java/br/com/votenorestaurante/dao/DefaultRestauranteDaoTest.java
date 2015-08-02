@@ -28,19 +28,13 @@ public class DefaultRestauranteDaoTest {
     @Before
     public void inicializar() throws Exception {
         dao = new DefaultRestauranteDao(em);
-
-        em.getTransaction().begin();
-        em.createNativeQuery("delete from restaurante").executeUpdate();
-        em.createNativeQuery("insert into restaurante(nome, imagem) values ('Teste 1', 'teste1.png')").executeUpdate();
-        em.getTransaction().commit();
     }
 
     @Test
     public void buscaTodosRestaurantes() {
         List<Restaurante> restaurantes = dao.todos();
 
-        assertThat(restaurantes).hasSize(1);
-        assertThat(restaurantes.get(0).getNome()).isEqualTo("Teste 1");
+        assertThat(restaurantes).hasSize(4);
     }
 
     @Test
@@ -51,45 +45,27 @@ public class DefaultRestauranteDaoTest {
 
         dao.salvar(restaurante);
 
-        assertThat(dao.todos()).hasSize(2);
+        assertThat(dao.todos()).hasSize(5);
+
+        em.getTransaction().begin();
+        em.remove(restaurante);
+        em.getTransaction().commit();
+
     }
 
     @Test
     public void geraDuelosPossiveisQuandoExistemRestaurantesCadastrados() {
-        Restaurante restaurante1 = dao.todos().get(0);
-
-        Restaurante restaurante2 = new Restaurante();
-        restaurante2.setNome("Teste 2");
-        dao.salvar(restaurante2);
-
-        Restaurante restaurante3 = new Restaurante();
-        restaurante3.setNome("Teste 3");
-        dao.salvar(restaurante3);
-
-        Restaurante restaurante4 = new Restaurante();
-        restaurante4.setNome("Teste 4");
-        dao.salvar(restaurante4);
+        List<Restaurante> restaurantes = dao.todos();
 
         List<Duelo> duelos = dao.duelosPossiveis();
 
         assertThat(duelos).hasSize(6).containsAll(Arrays.asList(
-                new Duelo(restaurante1, restaurante2),
-                new Duelo(restaurante1, restaurante3),
-                new Duelo(restaurante1, restaurante4),
-                new Duelo(restaurante2, restaurante3),
-                new Duelo(restaurante2, restaurante4),
-                new Duelo(restaurante3, restaurante4)
+                new Duelo(restaurantes.get(0), restaurantes.get(1)),
+                new Duelo(restaurantes.get(0), restaurantes.get(2)),
+                new Duelo(restaurantes.get(0), restaurantes.get(3)),
+                new Duelo(restaurantes.get(1), restaurantes.get(2)),
+                new Duelo(restaurantes.get(1), restaurantes.get(3)),
+                new Duelo(restaurantes.get(2), restaurantes.get(3))
         ));
-    }
-
-    @Test
-    public void naoGeraDuelosPossiveisQuandoNaoExistemRestaurantesCadastrados() {
-        em.getTransaction().begin();
-        em.createNativeQuery("delete from restaurante").executeUpdate();
-        em.getTransaction().commit();
-
-        List<Duelo> duelos = dao.duelosPossiveis();
-
-        assertThat(duelos).isEmpty();
     }
 }
