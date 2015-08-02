@@ -43,6 +43,8 @@ public class DefaultVotanteDaoTest {
                 .setParameter("votante", votante)
                 .getResultList();
         assertThat(votantes).hasSize(1);
+
+        limpeza(votante);
     }
 
     @Test
@@ -58,6 +60,8 @@ public class DefaultVotanteDaoTest {
                 .setParameter("votante", votante)
                 .getResultList();
         assertThat(votosSalvos).hasSize(2);
+
+        limpeza(votante);
     }
 
     private Votante criarVotante() {
@@ -81,5 +85,11 @@ public class DefaultVotanteDaoTest {
         voto2.setVencedor(restaurantes.get(3));
 
         return asList(voto1, voto2);
+    }
+
+    private void limpeza(Votante votante) {
+        em.getTransaction().begin();
+        em.remove(votante);
+        em.getTransaction().commit();
     }
 }
