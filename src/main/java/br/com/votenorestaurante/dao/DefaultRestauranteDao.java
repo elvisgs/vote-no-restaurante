@@ -3,6 +3,7 @@ package br.com.votenorestaurante.dao;
 import br.com.votenorestaurante.model.Duelo;
 import br.com.votenorestaurante.model.Restaurante;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ public class DefaultRestauranteDao extends BaseDao implements RestauranteDao {
         this(null);
     }
 
+    @Inject
     public DefaultRestauranteDao(EntityManager em) {
         super(em);
     }

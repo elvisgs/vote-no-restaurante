@@ -8,6 +8,14 @@ public class Restaurante extends Entidade {
     private String nome;
     private String imagem;
 
+    public Restaurante() {
+    }
+
+    public Restaurante(String nome, String imagem) {
+        this.nome = nome;
+        this.imagem = imagem;
+    }
+
     public String getNome() {
         return nome;
     }
