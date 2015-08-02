@@ -1,5 +1,8 @@
 package br.com.votenorestaurante.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Restaurante extends Entidade {
 
     private String nome;

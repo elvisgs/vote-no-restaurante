@@ -1,7 +1,15 @@
 package br.com.votenorestaurante.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Entidade {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public int getId() {
@@ -20,7 +28,6 @@ public abstract class Entidade {
         Entidade that = (Entidade) o;
 
         return id == that.id;
-
     }
 
     @Override

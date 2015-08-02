@@ -1,9 +1,20 @@
 package br.com.votenorestaurante.model;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Voto extends Entidade {
 
+    @ManyToOne
     private Votante votante;
+
+    @Embedded
     private Duelo duelo;
+
+    @ManyToOne
     private Restaurante vencedor;
 
     public Votante getVotante() {

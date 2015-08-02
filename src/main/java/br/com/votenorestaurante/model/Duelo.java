@@ -1,8 +1,17 @@
 package br.com.votenorestaurante.model;
 
+
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+
+@Embeddable
 public class Duelo {
 
-    private Restaurante restaurante1, restaurante2;
+    @ManyToOne
+    private Restaurante restaurante1;
+
+    @ManyToOne
+    private Restaurante restaurante2;
 
     protected Duelo() {}
 
