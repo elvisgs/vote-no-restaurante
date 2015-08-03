@@ -10,6 +10,7 @@ import br.com.votenorestaurante.model.Voto;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
@@ -41,7 +42,9 @@ public class Votacao implements Serializable {
     }
 
     private void carregarDuelosRestantes() {
+        duelosRestantes.clear();
         duelosPossiveis.stream().forEach(duelosRestantes::add);
+        Collections.shuffle(duelosRestantes);
     }
 
     public Votante getVotante() {

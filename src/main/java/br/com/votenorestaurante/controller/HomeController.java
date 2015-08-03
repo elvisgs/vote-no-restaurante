@@ -1,7 +1,9 @@
 package br.com.votenorestaurante.controller;
 
 import br.com.caelum.vraptor.*;
+import br.com.votenorestaurante.dao.VotoDao;
 import br.com.votenorestaurante.model.Duelo;
+import br.com.votenorestaurante.model.Ranking;
 import br.com.votenorestaurante.model.Restaurante;
 import br.com.votenorestaurante.model.Votante;
 import br.com.votenorestaurante.util.Votacao;
@@ -13,15 +15,17 @@ import java.util.Optional;
 public class HomeController {
 
     private final Votacao votacao;
+    private final VotoDao votoDao;
     private final Result result;
 
     public HomeController() {
-        this(null, null);
+        this(null, null, null);
     }
 
     @Inject
-    public HomeController(Votacao votacao, Result result) {
+    public HomeController(Votacao votacao, VotoDao votoDao, Result result) {
         this.votacao = votacao;
+        this.votoDao = votoDao;
         this.result = result;
     }
 
@@ -54,8 +58,11 @@ public class HomeController {
 
     @Path("/ranking")
     public void ranking() {
-        result.include("votos", votacao.getVotante().getVotos());
-        result.include("votante", votacao.getVotante());
+        result.include("ultimosVotos", votacao.getVotante().getVotos());
+
+        Ranking ranking = new Ranking(votoDao.todos());
+        result.include("rankingGeral", ranking);
+
         votacao.reiniciar();
     }
 }

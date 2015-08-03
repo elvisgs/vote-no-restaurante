@@ -6,10 +6,17 @@
     <title>Ranking</title>
 </head>
 <body>
-<h3>Ranking de ${votante.nome}</h3>
+<h3>Sua votação</h3>
 <ul>
-<c:forEach items="${votos}" var="v">
+<c:forEach items="${ultimosVotos}" var="v">
     <li>${v.duelo.restaurante1} X ${v.duelo.restaurante2} = ${v.vencedor}</li>
+</c:forEach>
+</ul>
+
+<h3>Ranking Geral</h3>
+<ul>
+<c:forEach items="${rankingGeral.itens}" var="r">
+    <li>${r.duelo.restaurante1}: ${r.pontosRestaurante1} X ${r.pontosRestaurante2} :${r.duelo.restaurante2}</li>
 </c:forEach>
 </ul>
 </body>

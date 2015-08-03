@@ -33,14 +33,14 @@ public class DefaultVotoDaoTest {
     public void buscaRankingDeUmVotante() {
         Votante votante = em.createQuery("select v from Votante v where v.id = 1", Votante.class).getSingleResult();
 
-        List<Voto> ranking = dao.rankingDoVotante(votante);
+        List<Voto> ranking = dao.doVotante(votante);
 
         assertThat(ranking).hasSize(3);
     }
 
     @Test
     public void buscaRankingGeral() {
-        List<Voto> ranking = dao.rankingGeral();
+        List<Voto> ranking = dao.todos();
 
         assertThat(ranking).hasSize(6);
     }

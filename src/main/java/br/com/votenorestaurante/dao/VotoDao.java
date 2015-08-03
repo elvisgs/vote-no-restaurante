@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface VotoDao {
 
-    List<Voto> rankingDoVotante(Votante votante);
-    List<Voto> rankingGeral();
+    List<Voto> doVotante(Votante votante);
+    List<Voto> todos();
 }
