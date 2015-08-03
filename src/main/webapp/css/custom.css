@@ -1,0 +1,66 @@
+.duelo h3 {
+    text-align: center;
+}
+
+.duelo label {
+    position: relative;
+}
+
+.duelo label > input {
+    visibility: hidden;
+    position: absolute;
+}
+
+.duelo label > input + img {
+    box-shadow: 0px 0px 2px #ccc;
+    cursor: pointer;
+}
+
+.duelo label > input:checked ~ input {
+    opacity: 0.5;
+}
+
+.duelo label > input:checked ~ .selecionado {
+    visibility: visible;
+}
+
+.duelo .selecionado {
+    font-size: 4em;
+    left: 84%;
+    position: absolute;
+    top: 81%;
+    visibility: hidden;
+}
+
+.duelo .versus {
+    position: relative;
+}
+
+.duelo .versus span {
+    font-size: 5em;
+    left: 0;
+    margin-top: 50%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 50%;
+}
+
+.ranking {
+    text-align: center;
+}
+
+.ranking li {
+    margin-bottom: 3px;
+}
+
+.ranking img {
+    box-shadow: 0px 0px 2px #ccc;
+    opacity: .3;
+    width: 50px;
+}
+
+.ranking img.vencedor,
+.ranking .geral img {
+    opacity: 1;
+}
