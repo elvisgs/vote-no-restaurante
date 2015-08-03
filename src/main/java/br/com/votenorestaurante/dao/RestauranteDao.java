@@ -10,4 +10,5 @@ public interface RestauranteDao {
     void salvar(Restaurante restaurante);
     List<Restaurante> todos();
     List<Duelo> duelosPossiveis();
+    void refresh(Restaurante restaurante);
 }

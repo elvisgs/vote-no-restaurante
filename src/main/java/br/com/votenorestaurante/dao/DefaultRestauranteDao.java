@@ -2,16 +2,18 @@ package br.com.votenorestaurante.dao;
 
 import br.com.votenorestaurante.model.Duelo;
 import br.com.votenorestaurante.model.Restaurante;
+import org.hibernate.Session;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
-public class DefaultRestauranteDao extends BaseDao implements RestauranteDao {
+public class DefaultRestauranteDao extends BaseDao implements RestauranteDao, Serializable {
 
     public DefaultRestauranteDao() {
         this(null);
@@ -48,5 +50,10 @@ public class DefaultRestauranteDao extends BaseDao implements RestauranteDao {
 
         Collections.shuffle(duelos);
         return duelos;
+    }
+
+    @Override
+    public void refresh(Restaurante restaurante) {
+        em.unwrap(Session.class).refresh(restaurante);
     }
 }

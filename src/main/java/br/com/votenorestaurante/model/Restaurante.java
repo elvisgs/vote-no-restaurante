@@ -34,8 +34,6 @@ public class Restaurante extends Entidade {
 
     @Override
     public String toString() {
-        return "Restaurante{" +
-                "nome='" + nome + '\'' +
-                '}';
+        return nome;
     }
 }

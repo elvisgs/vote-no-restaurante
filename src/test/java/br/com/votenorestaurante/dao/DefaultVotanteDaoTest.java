@@ -5,6 +5,7 @@ import br.com.votenorestaurante.model.Duelo;
 import br.com.votenorestaurante.model.Restaurante;
 import br.com.votenorestaurante.model.Votante;
 import br.com.votenorestaurante.model.Voto;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +32,12 @@ public class DefaultVotanteDaoTest {
     @Before
     public void inicializar() {
         dao = new DefaultVotanteDao(em);
+        em.getTransaction().begin();
+    }
+
+    @After
+    public void finalizar() {
+        em.getTransaction().commit();
     }
 
     @Test
@@ -88,8 +95,6 @@ public class DefaultVotanteDaoTest {
     }
 
     private void limpeza(Votante votante) {
-        em.getTransaction().begin();
         em.remove(votante);
-        em.getTransaction().commit();
     }
 }
