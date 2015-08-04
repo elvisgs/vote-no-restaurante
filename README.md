@@ -12,8 +12,9 @@
 - Bootstrap
 
 ### Testes
+O status da build pode ser visto no Codeship ou para rodar os testes localmente:
 `mvn -B test`
 
 ### Execução
 - `mvn jetty:run`
-- Acesse http://localhot:8080/vote-no-restaurante
+- Acesse http://localhost:8080/vote-no-restaurante
