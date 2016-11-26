@@ -15,7 +15,7 @@ public class Ranking implements Iterable<ItemRanking> {
     }
 
     private void totalizarPontos(Collection<Voto> votos) {
-        votos.stream().forEach(voto -> {
+        votos.forEach(voto -> {
             ItemRanking item = new ItemRanking(voto.getDuelo());
 
             if (!itens.contains(item))

@@ -50,7 +50,7 @@ public class VotacaoTest {
     public void aoIniciarDuelosRestantesDeveSerIgualADuelosPossiveis() {
         List<Duelo> duelosRestantes = votacao.getDuelosRestantes();
 
-        assertThat(duelosRestantes).hasSize(3);
+        assertThat(duelosRestantes).hasSameElementsAs(restauranteDao.duelosPossiveis());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class VotacaoTest {
     public void ofereceProximoDueloSeExistir() {
         Optional<Duelo> duelo = votacao.proximoDuelo();
 
-        assertThat(duelo.get()).isNotNull();
+        assertThat(duelo.isPresent()).isTrue();
     }
 
     @Test

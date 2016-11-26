@@ -8,10 +8,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 public class DefaultRestauranteDao extends BaseDao implements RestauranteDao, Serializable {
 

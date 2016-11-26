@@ -25,7 +25,7 @@ public class Votacao implements Serializable {
     private Votante votante = new Votante();
     private List<Duelo> duelosPossiveis;
     private Stack<Duelo> duelosRestantes = new Stack<>();
-    private Optional<Duelo> dueloAtual;
+    private Duelo dueloAtual;
 
     public Votacao() {
         this(null, null);
@@ -43,7 +43,7 @@ public class Votacao implements Serializable {
 
     private void carregarDuelosRestantes() {
         duelosRestantes.clear();
-        duelosPossiveis.stream().forEach(duelosRestantes::add);
+        duelosPossiveis.forEach(duelosRestantes::add);
         Collections.shuffle(duelosRestantes);
     }
 
@@ -56,22 +56,22 @@ public class Votacao implements Serializable {
     }
 
     public Optional<Duelo> getDueloAtual() {
-        return dueloAtual;
+        return Optional.of(dueloAtual);
     }
 
     public Optional<Duelo> proximoDuelo() {
         if (duelosRestantes.empty()) {
-            dueloAtual = Optional.empty();
+            dueloAtual = null;
             return Optional.empty();
         }
 
-        dueloAtual = Optional.of(duelosRestantes.pop());
-        return dueloAtual;
+        dueloAtual = duelosRestantes.pop();
+        return Optional.of(dueloAtual);
     }
 
     public void votar(Restaurante restaurante) {
         Voto voto = new Voto();
-        voto.setDuelo(dueloAtual.get());
+        voto.setDuelo(dueloAtual);
         restauranteDao.refresh(restaurante);
         voto.setVencedor(restaurante);
         votante.addVoto(voto);
