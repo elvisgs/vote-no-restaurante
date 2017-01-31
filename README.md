@@ -17,4 +17,4 @@ O status da build pode ser visto no Codeship ou para rodar os testes localmente:
 
 ### Execução
 - `mvn jetty:run`
-- Acesse http://localhost:8080/vote-no-restaurante
+- Acesse http://localhost:8080
